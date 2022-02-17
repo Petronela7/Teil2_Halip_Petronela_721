@@ -47,4 +47,5 @@ public class Mitarbeiter {
                 ", lohn=" + lohn +
                 '}';
     }
+
 }

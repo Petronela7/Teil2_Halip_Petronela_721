@@ -2,10 +2,15 @@ package controller;
 
 import model.Mitarbeiter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MitarbeiterCtrl implements MitarbeiterInterface {
     private List<Mitarbeiter> mitarbeiters;
+
+    public MitarbeiterCtrl() {
+        mitarbeiters = new ArrayList<>();
+    }
 
     /**
      * Adds an employee to the list
@@ -60,5 +65,12 @@ public class MitarbeiterCtrl implements MitarbeiterInterface {
     @Override
     public List<Mitarbeiter> getAllMitarbeiter() {
         return mitarbeiters;
+    }
+    public Mitarbeiter findByName(String name)
+    {
+        for(Mitarbeiter mitarbeiter:mitarbeiters)
+            if(mitarbeiter.getName() == name)
+                return mitarbeiter;
+            return null;
     }
 }

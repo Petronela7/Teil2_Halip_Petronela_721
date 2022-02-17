@@ -9,12 +9,18 @@ import java.util.stream.Collectors;
 
 public class TeamCtrl implements TeamInterface{
     private List<Team> teams;
+
+    public TeamCtrl() {
+        this.teams = new ArrayList<>();
+    }
+
     /**
      * Adds a team to the teams list
      *
      * @param team Team
      * @return Team
      */
+
     @Override
     public Team addTeam(Team team) {
         if (!teams.contains(team)) {
@@ -78,6 +84,14 @@ public class TeamCtrl implements TeamInterface{
                 .filter(x->x.getMitarbeiters().contains(mitarbeiter))
                 .collect(Collectors.toList());
         return teams1;
+    }
+
+    public Team findByName(String name)
+    {
+        for(Team team: teams)
+            if(team.getName() == name)
+                return team;
+            return null;
     }
 
 }

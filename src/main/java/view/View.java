@@ -45,42 +45,123 @@ public class View {
             int variant = scanner.nextInt();
             System.out.println("You've entered: " + variant);
             switch (variant) {
-                /*case 0:
+                case 0:
                     break loop;
                 case 1:
-                    showMovies();
+                    showEmployees();
                     break;
                 case 2:
-                    showActors();
+                    showTeams();
                     break;
                 case 3:
-                    addMovie();
+                    addEmployee();
                     break;
                 case 4:
-                    addActor();
+                    addTeam();
                     break;
                 case 5:
-                    deleteMovie();
+                    deleteEmployee();
                     break;
                 case 6:
-                    deleteActor();
+                    deleteTeam();
                     break;
                 case 7:
-                    updateMovie();
+                    updateEmployee();
                     break;
                 case 8:
-                    updateActor();
+                    updateTeam();
                     break;
                 case 9:
-                    addActorToMovie();
+                    addEmployeeToTeam();
                     break;
                 case 10:
-                    getTopActors();
-                    break;*/
+                    getFilteredTeams();
+                    break;
             }
 
         }
     }
 
+    private void showEmployees() {
+        System.out.println(mitarbeiterCtrl.getAllMitarbeiter());
+    }
 
+    private void addEmployee() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Employee name:");
+        try {
+            String name = scanner.next();
+            System.out.println("Enter salary:");
+            int salary = scanner.nextInt();
+            Mitarbeiter mitarbeiter = new Mitarbeiter(name,salary);
+            mitarbeiterCtrl.addMitarbeiter(mitarbeiter);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    private void deleteEmployee() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Employee name:");
+        String name= scanner.next();
+        mitarbeiterCtrl.deleteMitarbeiter(name);
+    }
+
+    private void updateEmployee() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter Employee name:");
+            String name  = scanner.next();
+            System.out.println("Enter Employee Salary");
+            scanner.nextLine(); //throw away the \n not consumed by nextInt()
+            int salary = scanner.nextInt();
+            mitarbeiterCtrl.updateMitarbeiter(name,salary);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    private void showTeams() {
+        System.out.println(teamCtrl.getAllTeams());
+    }
+
+    private void addTeam() {
+
+    }
+
+    private void deleteTeam() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Team name");
+        String name = scanner.next();
+        teamCtrl.deleteTeam(name);
+    }
+
+    private void updateTeam() {
+
+    }
+
+    private void addEmployeeToTeam() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter team name:");
+        try {
+            String name1 = scanner.next();
+            System.out.println("Enter Employee name:");
+            String name2 = scanner.next();
+            Mitarbeiter mitarbeiter = mitarbeiterCtrl.findByName(name2);
+            Team team = teamCtrl.findByName(name1);
+            team.addEmployee(mitarbeiter);
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    private void getFilteredTeams(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Mitarbeiter name:");
+        String name = scanner.next();
+        List<Team> teams = teamCtrl.filterByTeamMember(mitarbeiterCtrl.findByName(name));
+        System.out.println(teams);
+
+    }
 }
